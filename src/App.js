@@ -24,7 +24,7 @@ class App extends Component {
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
-          <Route exact="/videos/:id" component={VideoItem} />
+          <Route exact path="/videos/:id" component={VideoItem} />
         </Switch>
       </ThemeContext.Provider>
     )
