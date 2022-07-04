@@ -3,11 +3,9 @@ import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import {formatDistanceToNow} from 'date-fns'
 import Loader from 'react-loader-spinner'
-import {CgPlayListAdd} from 'react-icons/cg'
 import {GrFormClose} from 'react-icons/gr'
-import {SiYoutubegaming} from 'react-icons/si'
-import {HiSearch, HiFire} from 'react-icons/hi'
-import {AiFillHome} from 'react-icons/ai'
+import {HiSearch} from 'react-icons/hi'
+import LeftMenuBar from '../LeftMenuBar'
 import ThemeContext from '../../context/ThemeContext'
 import Header from '../Header'
 import {
@@ -37,14 +35,6 @@ import {
   NoResultPara,
   RetryBtn,
   LoaderContainer,
-  LeftMenuContainer,
-  Icon,
-  Span,
-  IconContainer,
-  ContactUsContainer,
-  ContactPara,
-  FbImage,
-  ContactUsPara,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -91,6 +81,7 @@ class Home extends Component {
         thumbnailUrl: each.thumbnail_url,
         title: each.title,
         viewCount: each.view_count,
+        isSaved: false,
       }))
       this.setState({data: updatedData, apiStatus: apiStatusConstants.success})
     } else {
@@ -253,60 +244,7 @@ class Home extends Component {
       <div>
         <Header />
         <HomeContainer data-testid="banner">
-          <LeftMenuContainer>
-            <div>
-              <Link to="/" style={{textDecoration: 'none'}}>
-                <IconContainer>
-                  <Icon>
-                    <AiFillHome />
-                  </Icon>
-                  <Span>Home</Span>
-                </IconContainer>
-              </Link>
-              <Link to="/" style={{textDecoration: 'none'}}>
-                <IconContainer>
-                  <Icon>
-                    <HiFire />
-                  </Icon>
-                  <Span>Trending</Span>
-                </IconContainer>
-              </Link>
-              <Link to="/" style={{textDecoration: 'none'}}>
-                <IconContainer>
-                  <Icon>
-                    <SiYoutubegaming />
-                  </Icon>
-                  <Span>Gaming</Span>
-                </IconContainer>
-              </Link>
-              <Link to="/" style={{textDecoration: 'none'}}>
-                <IconContainer>
-                  <Icon>
-                    <CgPlayListAdd />
-                  </Icon>
-                  <Span>Saved videos</Span>
-                </IconContainer>
-              </Link>
-            </div>
-            <ContactUsContainer>
-              <ContactPara>CONTACT US</ContactPara>
-              <FbImage
-                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
-                alt="facebook logo"
-              />
-              <FbImage
-                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png"
-                alt="twitter logo"
-              />
-              <FbImage
-                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
-                alt="linked in logo"
-              />
-              <ContactUsPara>
-                Enjoy! Now to see your channels and recommendations!
-              </ContactUsPara>
-            </ContactUsContainer>
-          </LeftMenuContainer>
+          <LeftMenuBar />
           <div>
             {showBanner && (
               <Banner data-testid="banner">

@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import {FaMoon} from 'react-icons/fa'
 import {FiLogOut} from 'react-icons/fi'
 import {HiMenu, HiOutlineLightBulb} from 'react-icons/hi'
+
 import ThemeContext from '../../context/ThemeContext'
 import {
   HeaderLogoImage,
