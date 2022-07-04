@@ -1,33 +1,28 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {formatDistanceToNow} from 'date-fns'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {HiFire} from 'react-icons/hi'
+import {SiYoutubegaming} from 'react-icons/si'
 import ThemeContext from '../../context/ThemeContext'
 import Header from '../Header'
 import LeftMenuBar from '../LeftMenuBar'
 import {
-  VideosList,
-  VideoImg,
-  ProfileImgContainer,
-  TitleContainer,
-  Title,
-  ChannelImg,
-  VideoDetailsList,
-  VideoDetails,
-  Para,
+  GamingContainer,
+  GamingContentContainer,
+  LoaderContainer,
   SavedBannerContainer,
   Saved,
   Icon,
+  GameVideoList,
+  Img,
+  List,
+  Title,
+  Views,
   NoResultsContainer,
   NoResultsImage,
   NoResultHeading,
   NoResultPara,
   RetryBtn,
-  SavedVideosContainer,
-  SavedContentContainer,
-  LoaderContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -37,8 +32,8 @@ const apiStatusConstants = {
   failure: 'FAILURE',
 }
 
-class Trending extends Component {
-  state = {apiStatus: apiStatusConstants.initial, data: {}}
+class Gaming extends Component {
+  state = {apiStatus: apiStatusConstants.initial}
 
   componentDidMount() {
     this.getVideoDetails()
@@ -53,22 +48,16 @@ class Trending extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const response = await fetch(
-      `https://apis.ccbp.in/videos/trending`,
-      options,
-    )
+    const response = await fetch(`https://apis.ccbp.in/videos/gaming`, options)
     if (response.ok === true) {
       const data = await response.json()
       //   console.log(data)
       const {videos} = data
       const updatedData = videos.map(each => ({
         id: each.id,
-        channel: each.channel,
-        publishedAt: each.published_at,
         thumbnailUrl: each.thumbnail_url,
         title: each.title,
         viewCount: each.view_count,
-        isSaved: false,
       }))
       this.setState({data: updatedData, apiStatus: apiStatusConstants.success})
     } else {
@@ -98,6 +87,37 @@ class Trending extends Component {
     </ThemeContext.Consumer>
   )
 
+  renderSuccessView = () => {
+    const {data} = this.state
+
+    return (
+      <>
+        <GamingContentContainer>
+          <SavedBannerContainer>
+            <Icon>
+              <SiYoutubegaming />
+            </Icon>
+            <Saved>Gaming</Saved>
+          </SavedBannerContainer>
+          <GameVideoList>
+            {data.map(each => (
+              <List key={each.id}>
+                <Link
+                  to={`/videos/${each.id}`}
+                  style={{textDecoration: 'none'}}
+                >
+                  <Img src={each.thumbnailUrl} alt="video thumbnail" />
+                  <Title>{each.title}</Title>
+                  <Views>{each.viewCount} Watching Worldwide</Views>
+                </Link>
+              </List>
+            ))}
+          </GameVideoList>
+        </GamingContentContainer>
+      </>
+    )
+  }
+
   renderFailureView = () => (
     <ThemeContext.Consumer>
       {value => {
@@ -124,54 +144,7 @@ class Trending extends Component {
     </ThemeContext.Consumer>
   )
 
-  renderSuccessView = () => {
-    const {data} = this.state
-    console.log(data)
-
-    return (
-      <SavedContentContainer>
-        <SavedBannerContainer>
-          <Icon>
-            <HiFire />
-          </Icon>
-          <Saved>Trending</Saved>
-        </SavedBannerContainer>
-        <VideosList>
-          {data.map(each => (
-            <li key={each.id}>
-              <Link to={`/videos/${each.id}`} style={{textDecoration: 'none'}}>
-                <VideoImg src={each.thumbnailUrl} alt="video thumbnail" />
-                <ProfileImgContainer>
-                  <ChannelImg
-                    src={each.channel.profile_image_url}
-                    alt="channel logo"
-                  />
-                  <TitleContainer>
-                    <Title>{each.title}</Title>
-                    <VideoDetailsList>
-                      <VideoDetails name="true">
-                        <Para>{each.channel.name}</Para>
-                      </VideoDetails>
-                      <VideoDetails>
-                        <Para>{each.viewCount} views</Para>
-                      </VideoDetails>
-                      <VideoDetails>
-                        <Para>
-                          {formatDistanceToNow(new Date(each.publishedAt))}
-                        </Para>
-                      </VideoDetails>
-                    </VideoDetailsList>
-                  </TitleContainer>
-                </ProfileImgContainer>
-              </Link>
-            </li>
-          ))}
-        </VideosList>
-      </SavedContentContainer>
-    )
-  }
-
-  renderVideoDetails = () => {
+  renderGameDetails = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
@@ -189,13 +162,13 @@ class Trending extends Component {
     return (
       <>
         <Header />
-        <SavedVideosContainer>
+        <GamingContainer>
           <LeftMenuBar />
-          {this.renderVideoDetails()}
-        </SavedVideosContainer>
+          {this.renderGameDetails()}
+        </GamingContainer>
       </>
     )
   }
 }
 
-export default Trending
+export default Gaming

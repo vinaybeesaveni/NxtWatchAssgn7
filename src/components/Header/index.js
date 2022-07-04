@@ -1,5 +1,6 @@
 import {withRouter, Link} from 'react-router-dom'
 import {Component} from 'react'
+import Popup from 'reactjs-popup'
 import Cookies from 'js-cookie'
 import {FaMoon} from 'react-icons/fa'
 import {FiLogOut} from 'react-icons/fi'
@@ -64,14 +65,26 @@ class Header extends Component {
                   />
                 </li>
                 <li>
-                  <LogoutIcon
-                    type="button"
-                    onClick={this.onLogout}
-                    isDarkMode={isDarkMode}
-                    mobile
+                  <Popup
+                    trigger={
+                      <LogoutIcon
+                        type="button"
+                        onClick={this.onLogout}
+                        isDarkMode={isDarkMode}
+                        mobile
+                      >
+                        <FiLogOut />
+                      </LogoutIcon>
+                    }
+                    modal
                   >
-                    <FiLogOut />
-                  </LogoutIcon>
+                    <div>
+                      <p>
+                        React is a popular and widely used programming language
+                      </p>
+                    </div>
+                  </Popup>
+
                   <LogoutButton
                     type="button"
                     onClick={this.onLogout}

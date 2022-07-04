@@ -36,7 +36,7 @@ class LeftMenuBar extends Component {
               <Span>Trending</Span>
             </IconContainer>
           </Link>
-          <Link to="/" style={{textDecoration: 'none'}}>
+          <Link to="/gaming" style={{textDecoration: 'none'}}>
             <IconContainer>
               <Icon>
                 <SiYoutubegaming />

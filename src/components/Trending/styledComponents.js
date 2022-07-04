@@ -19,6 +19,7 @@ export const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+  width: 100%;
 `
 
 export const Title = styled.p`
@@ -116,4 +117,52 @@ export const SavedVideosContainer = styled.div`
     display: flex;
     align-items: flex-start;
   }
+`
+export const NoResultsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 60vh;
+`
+export const NoResultsImage = styled.img`
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+`
+export const NoResultHeading = styled.h1`
+  font-size: 20px;
+  margin-top: 15px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  margin-bottom: 0;
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+`
+export const NoResultPara = styled.p`
+  text-align: center;
+  font-size: 17px;
+  font-weight: 400;
+  max-width: 300px;
+  color: #94a3b8;
+  font-family: 'Roboto';
+  line-height: 1.5em;
+  color: ${props => (props.isDarkMode ? '#e2e8f0' : 'black')};
+`
+export const RetryBtn = styled.button`
+  background-color: #3b82f6;
+  border: none;
+  width: 90px;
+  height: 35px;
+  font-size: 15px;
+  color: white;
+  border-radius: 5px;
+  font-family: 'Roboto';
+  cursor: pointer;
+  outline: none;
+`
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
 `
