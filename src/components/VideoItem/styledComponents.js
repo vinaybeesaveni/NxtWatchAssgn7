@@ -15,7 +15,7 @@ export const VideoItemContent = styled.div`
 `
 
 export const Title = styled.p`
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 400;
   font-family: 'Roboto';
   margin-top: 0;
@@ -34,4 +34,60 @@ export const List = styled.li`
   color: #475569;
   list-style: ${props => props.views && 'none'};
   font-size: 15px;
+`
+export const LikeDislikeContainer = styled.div`
+  display: flex;
+  width: 70%;
+  align-items: center;
+`
+export const LikeContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  margin-right: 20px;
+`
+export const Icon = styled.i`
+  font-size: 18px;
+  color: #475569;
+`
+export const Like = styled.p`
+  color: #475569;
+  font-size: 16px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  margin-left: 5px;
+  margin-top: ${props => (props.like ? '1px' : '0')};
+`
+export const VideoProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+export const ProfileImg = styled.img`
+  width: 50px;
+  height: 50px;
+`
+export const SubscribeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+`
+
+export const Name = styled.p`
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  font-family: 'Roboto';
+`
+export const SubscribeCount = styled.p`
+  font-size: 14px;
+  font-weight: 400;
+  color: #475569;
+  margin: 0;
+  margin-top: 5px;
+  font-family: 'Roboto';
+`
+export const VideoDescription = styled.p`
+  font-size: 14px;
+  line-height: 1.4em;
+  font-family: 'Roboto';
+  color: #475569;
 `

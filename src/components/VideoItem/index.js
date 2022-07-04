@@ -2,6 +2,8 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {formatDistanceToNow} from 'date-fns'
 import ReactPlayer from 'react-player'
+import {BiLike, BiDislike} from 'react-icons/bi'
+import {CgPlayListAdd} from 'react-icons/cg'
 import Header from '../Header'
 import {
   VideoItemContainer,
@@ -11,6 +13,16 @@ import {
   VideoItemContent,
   List,
   ViewsList,
+  LikeDislikeContainer,
+  LikeContainer,
+  Icon,
+  Like,
+  VideoProfileContainer,
+  ProfileImg,
+  SubscribeContainer,
+  Name,
+  SubscribeCount,
+  VideoDescription,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -51,6 +63,7 @@ class VideoItem extends Component {
         thumbnailUrl: each.thumbnail_url,
         title: each.title,
         viewCount: each.view_count,
+        description: each.description,
       }
       this.setState({data: updatedData, apiStatus: apiStatusConstants.success})
     }
@@ -58,6 +71,13 @@ class VideoItem extends Component {
 
   renderSuccessView = () => {
     const {data} = this.state
+    const {channel} = data
+    const channelDetails = {
+      name: channel.name,
+      profileImgUrl: channel.profile_image_url,
+      subscriberCount: channel.subscriber_count,
+    }
+
     return (
       <VideoContainer>
         <ReactPlayerContainer>
@@ -72,6 +92,37 @@ class VideoItem extends Component {
                 <p>{formatDistanceToNow(new Date(data.publishedAt))}</p>
               </List>
             </ViewsList>
+            <LikeDislikeContainer>
+              <LikeContainer>
+                <Icon>
+                  <BiLike />
+                </Icon>
+                <Like like="true">Like</Like>
+              </LikeContainer>
+              <LikeContainer>
+                <Icon>
+                  <BiDislike />
+                </Icon>
+                <Like>Dislike</Like>
+              </LikeContainer>
+              <LikeContainer>
+                <Icon>
+                  <CgPlayListAdd />
+                </Icon>
+                <Like>Save</Like>
+              </LikeContainer>
+            </LikeDislikeContainer>
+            <hr />
+            <VideoProfileContainer>
+              <ProfileImg src={channelDetails.profileImgUrl} alt="profile" />
+              <SubscribeContainer>
+                <Name>{channelDetails.name}</Name>
+                <SubscribeCount>
+                  {channelDetails.subscriberCount} subscribers
+                </SubscribeCount>
+              </SubscribeContainer>
+            </VideoProfileContainer>
+            <VideoDescription>{data.description}</VideoDescription>
           </VideoItemContent>
         </ReactPlayerContainer>
       </VideoContainer>
