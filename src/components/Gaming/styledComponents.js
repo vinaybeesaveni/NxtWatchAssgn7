@@ -117,3 +117,6 @@ export const RetryBtn = styled.button`
   cursor: pointer;
   outline: none;
 `
+export const PopupContent = styled.div`
+  width: 80%;
+`

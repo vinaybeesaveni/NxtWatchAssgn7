@@ -52,6 +52,7 @@ export const LogoutButton = styled.button`
     justify-content: center;
     border-radius: 5px;
     color: #3b82f6;
+    cursor: pointer;
   }
 `
 
@@ -62,4 +63,57 @@ export const MenuProfileImg = styled.img`
   @media screen and (min-width: 768px) {
     display: flex;
   }
+`
+
+export const PopupContainer = styled.div`
+  width: 100%;
+  position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+`
+export const PopupContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: white;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #94a3b8;
+  background-color: #e2e8f0;
+  height: 150px;
+`
+export const LogoutQun = styled.p`
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  color: #00306e;
+`
+export const PopupLogout = styled.button`
+  border-radius: 4px;
+  border: none;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 500;
+  font-family: 'Roboto';
+  height: 35px;
+  width: 80px;
+  margin: 7px;
+  cursor: pointer;
+`
+
+export const CancelButton = styled.button`
+  border: 1px solid #64748b;
+  border-radius: 4px;
+  color: #64748b;
+  background-color: transparent;
+  font-weight: 500;
+  font-family: 'Roboto';
+  margin: 7px;
+  height: 35px;
+  width: 80px;
+  cursor: pointer;
 `

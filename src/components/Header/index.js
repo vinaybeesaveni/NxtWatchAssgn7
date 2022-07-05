@@ -15,6 +15,11 @@ import {
   LogoutIcon,
   MenuList,
   MenuProfileImg,
+  PopupContainer,
+  PopupContent,
+  LogoutQun,
+  CancelButton,
+  PopupLogout,
 } from './styledComponents'
 
 class Header extends Component {
@@ -23,6 +28,18 @@ class Header extends Component {
     const {history} = this.props
     history.replace('/login')
   }
+
+  renderPopUpView = close => (
+    <PopupContainer>
+      <PopupContent>
+        <LogoutQun>Are you sure you want to logout?</LogoutQun>
+        <div>
+          <CancelButton onClick={() => close()}>Cancel</CancelButton>
+          <PopupLogout onClick={this.onLogout}>Logout</PopupLogout>
+        </div>
+      </PopupContent>
+    </PopupContainer>
+  )
 
   render() {
     return (
@@ -67,31 +84,29 @@ class Header extends Component {
                 <li>
                   <Popup
                     trigger={
-                      <LogoutIcon
-                        type="button"
-                        onClick={this.onLogout}
-                        isDarkMode={isDarkMode}
-                        mobile
-                      >
+                      <LogoutIcon type="button" isDarkMode={isDarkMode} mobile>
                         <FiLogOut />
                       </LogoutIcon>
                     }
                     modal
                   >
-                    <div>
-                      <p>
-                        React is a popular and widely used programming language
-                      </p>
-                    </div>
+                    {close => this.renderPopUpView(close)}
                   </Popup>
 
-                  <LogoutButton
-                    type="button"
-                    onClick={this.onLogout}
-                    isDarkMode={isDarkMode}
+                  <Popup
+                    trigger={
+                      <LogoutButton
+                        type="button"
+                        onClick={this.onLogout}
+                        isDarkMode={isDarkMode}
+                      >
+                        Logout
+                      </LogoutButton>
+                    }
+                    modal
                   >
-                    Logout
-                  </LogoutButton>
+                    {close => this.renderPopUpView(close)}
+                  </Popup>
                 </li>
               </MenuList>
             </Navbar>
